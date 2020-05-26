@@ -58,9 +58,9 @@ def call_wsgi_app(wsgi_app, request, path_info):
     new_request.path_info = path_info
     new_request.script_name = webob_request.script_name + consumed_path
     
-    # If the user has been authenticated in Django, log him in the WSGI app:
+    # If the user has been authenticated in Django, log them in the WSGI app:
     if request.user.is_authenticated:
-        new_request.remote_user = request.user.username
+        new_request.remote_user = request.user.pk
     
     # Cleaning the routing_args, if any. The application should have its own
     # arguments, without relying on any arguments from a parent application:
