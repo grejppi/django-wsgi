@@ -60,7 +60,8 @@ def call_wsgi_app(wsgi_app, request, path_info):
     
     # If the user has been authenticated in Django, log them in the WSGI app:
     if request.user.is_authenticated:
-        new_request.remote_user = request.user.pk
+        username_field = request.user.USERNAME_FIELD
+        new_request.remote_user = getattr(request.user, username_field)
     
     # Cleaning the routing_args, if any. The application should have its own
     # arguments, without relying on any arguments from a parent application:
